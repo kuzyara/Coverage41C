@@ -69,6 +69,7 @@ public abstract class CoverServer {
                 serverSocket = new Win32NamedPipeServerSocket(pipeName, false, Win32SecurityLevel.OWNER_DACL);
             } else {
                 serverSocket = new UnixDomainServerSocket(pipeName);
+                serverSocket.setReuseAddress(true);
             }
             CompletableFuture.supplyAsync(() -> {
                 logger.info("Set socket listener...");
